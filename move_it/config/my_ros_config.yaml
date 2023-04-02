@@ -1,0 +1,19 @@
+controller_list:
+  - name: robot_arm_controller
+    action_ns: follow_joint_trajectory
+    type: JointEffortTrajectory
+    joints:
+      - junta1
+      - junta
+      - junta3
+      - junta4
+      - junta5
+  - name: gripper_controller
+    action_ns: follow_joint_trajectory
+    type: JointEffortTrajectory
+    joints:
+    - palm_riser
+    - palm_left_finger
+    - left_finger_tip
+    - palm_right_finger
+    - right_finger_tip
