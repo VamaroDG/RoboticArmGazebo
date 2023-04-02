@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="limited" default="false" doc="If true, limits joint range [-PI, PI] on all joints." />
+  <arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface" />
+  <param unless="$(arg limited)" name="robot_description" command="$(find xacro)/xacro --inorder '$(find my_robot_description)/urdf/my_robot_urdf.xacro' transmission_hw_interface:=$(arg transmission_hw_interface)"/>
+  <param if="$(arg limited)" name="robot_description" command="$(find xacro)/xacro --inorder '$(find my_robot_description)/launch/my_robot_joint_limit.urdf.xacro' transmission_hw_interface:=$(arg transmission_hw_interface)" />
+
+</launch>

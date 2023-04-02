@@ -1,0 +1,557 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" 
+    xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+    xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+    xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+    name="robot">
+<!-- 203.35  e 20.135 -->
+   <xacro:property name="damping_value" value="0"/>  
+  <xacro:property name="friction_value" value="10"/> 
+<!-- friction = friccao, damping =  reducao de oscilacoes, ou vibracoes -->
+
+<!-- <xacro:macro name="transmission_block" params="joint_name idx">
+      <transmission name="tran_${idx}">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="${joint_name}">
+          <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor__${idx}">
+          <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+          <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+      </transmission>
+</xacro:macro> -->
+
+
+<xacro:macro name="my_robot" params="prefix joint_limited
+junta1_lower_limit:=${-pi}    junta1_upper_limit:=${pi}
+junta2_lower_limit:=${-pi}    junta2_upper_limit:=${pi}
+junta3_lower_limit:=${-pi}    junta3_upper_limit:=${pi}
+junta4_lower_limit:=${-pi}    junta4_upper_limit:=${pi}
+junta5_lower_limit:=${-pi}    junta5_upper_limit:=${pi}
+transmission_hw_interface:=hardware_interface/PositionJointInterface
+safety_limits:=false safety_pos_margin:=0.15
+safe
+ty_k_position:=20">
+<xacro:my_arm_transmission prefix="${prefix}" hw_interface="${transmission_hw_interface}" />
+    <xacro:my_arm_gazebo prefix="${prefix}" />
+
+<link name="dummy">
+</link> 
+  <link name="base_link">  
+    <pose>0 0 1 0 0 0 </pose>  
+    <!-- x y z ro rotacao -->
+    <inertial>
+        <mass value="50"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <inertia ixx="0.3954166667" ixy="0" ixz="0" iyy="0.10620833" iyz="0" izz="0.1062083333"/>
+    </inertial>  
+
+    <collision name="collision_chassis">   
+        <geometry>
+            <box size="0.8 0.8 0.6"/>       
+        </geometry> 
+    </collision>
+    <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+            <box size="0.8 0.8 0.4"/>      
+        </geometry> 
+        <material name="Cyan">
+            <color rgba="0 1.0 1.0 1.0"/>
+        </material>
+    </visual>
+</link>
+<static>true</static>
+<link name="base">    
+    <pose>0 0 0 0 0 </pose>  
+ 
+    <inertial>
+        <mass value="2"/>
+        <origin rpy="0 0 0" xyz="0 0 0.5"/>
+        <inertia ixx="0.3954166667" ixy="0" ixz="0" iyy="0.10620833" iyz="0" izz="0.1062083333"/>
+    </inertial>  
+
+    <collision name="collision_chassis">   
+        <geometry>
+            <cylinder radius="0.25" length="0.5"/>      
+        </geometry> 
+    </collision>
+    <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+                <cylinder radius="0.25" length="0.5"/>    
+        </geometry> 
+        <material name="Yellow">
+            <color rgba="0 1.0 0.2 1.0"/>      
+       </material>
+    </visual>
+    <!-- quadrados suporte -->
+    <visual>
+        <origin rpy="0 0 0" xyz="0 0.2 0.45"/>
+        <geometry>
+                <box size= "0.4 0.07 0.4" />   <!-- x y z   -->
+        </geometry> 
+        <material name="Blue">
+            <color rgba="0 0 0.8 1"/>
+        </material>
+    </visual>
+    <visual>
+        <origin rpy="0 0 0" xyz="0 -0.2 0.45"/>
+        <geometry>
+                <box size= "0.4 0.07 0.4" />   
+        </geometry> 
+        <material name="Blue">
+            <color rgba="0 0 0.8 1"/>
+        </material>
+    </visual>
+</link>
+<static>true</static>
+
+<link name="ligacao">   
+    <pose>0 0 0 0 0 </pose>  
+    <inertial>
+        <mass value="0.5"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <inertia ixx="0.3954166667" ixy="0" ixz="0" iyy="0.10620833" iyz="0" izz="0.1062083333"/>
+    </inertial>  
+
+    <collision name="collision_chassis">
+        <origin rpy="0 0 0" xyz="0 0 0.5" />
+        <geometry>
+            <cylinder radius="0.15" length="1"/>        
+        </geometry> 
+    </collision>
+
+    <visual>
+        <origin rpy="0 0 0" xyz="0 0 0.5"/>
+        <geometry>
+                <cylinder radius="0.15" length="1"/>
+        </geometry> 
+        <material name="Green">
+            <color rgba="0 1.0 0.2 1.0"/>      
+        </material>
+    </visual>
+    
+     <visual>
+        <origin rpy="0 0 0" xyz="0 0.17 1.13"/>
+        <geometry>
+                <box size= "0.4 0.05 0.5" />   
+        </geometry> 
+        <material name="Blue">
+            <color rgba="0 0 0.8 1"/>
+        </material>
+    </visual>
+    <visual> 
+        <origin rpy="0 0 0" xyz="0 -0.17 1.13"/>
+        <geometry>
+                <box size= "0.4 0.05 0.5" /> 
+        </geometry> 
+        <material name="Blue">
+            <color rgba="0 0 0.8 1"/>
+        </material>
+    </visual>
+    <collision name="collision_chassis">   
+        <origin rpy="1.58 0 0" xyz="0 0 -0.07"/>
+        <geometry>
+            <cylinder radius="0.2" length="0.3"/>   
+        </geometry> 
+    </collision>
+    <visual>
+        <origin rpy="1.58 0 0" xyz="0 0 -0.07"/>
+        <geometry>
+                <cylinder radius="0.2" length="0.3"/>   
+        </geometry> 
+        <material name="Yellow">
+            <color rgba="1.0 1.0 0 1.0"/>
+        </material>
+    </visual>
+</link>
+<static>true</static>
+
+<link name="braco">    
+    <pose>0 0 0 0 0 </pose>  
+    <inertial>
+        <mass value="0.5"/>
+        <origin rpy="0 0 0" xyz="0 0 2"/>
+        <inertia ixx="0.3954166667" ixy="0" ixz="0" iyy="0.10620833" iyz="0" izz="0.1062083333"/>
+    </inertial>  
+
+    <collision name="collision_chassis">   
+        <origin rpy="0 0 0" xyz="0 0 0.7" />
+        <geometry>
+            <cylinder radius="0.125" length="1"/>       
+        </geometry> 
+    </collision>
+    
+    <visual>
+        <origin rpy="0 0 0" xyz="0 0 0.7"/>
+        <geometry>
+                <cylinder radius="0.125" length="1"/>    
+        </geometry> 
+        <material name="Red">
+            <color rgba="0 2.0 1.0 1.0"/>
+        </material>
+    </visual>
+     <collision name="suporte_cilindro">   
+        <origin rpy="1.58 0 0" xyz="0 0 0.04"/>
+        <geometry>
+            <cylinder radius="0.2" length="0.3"/>       
+        </geometry> 
+    </collision> 
+
+    <visual>
+        <origin rpy="1.58 0 0" xyz="0 0 0.04"/>
+        <geometry>
+                <cylinder radius="0.2" length="0.3"/>   
+        </geometry> 
+        <material name="yellow">
+            <color rgba="1.0 1.0 0 1.0"/>
+        </material>
+    </visual>
+</link>
+<static>true</static>
+
+<link name="antepunho">   
+    <pose>0 0 0 0 0 </pose>  
+    <inertial>
+        <mass value="0.1"/>
+        <origin rpy="0 0 0" xyz="0 0 2"/>
+        <inertia ixx="0.3954166667" ixy="0" ixz="0" iyy="0.10620833" iyz="0" izz="0.1062083333"/>
+    </inertial>  
+
+    <collision name="collision_chassis">   
+        <geometry>
+            <sphere radius="0.12" length="1.2"/>       
+        </geometry> 
+    </collision>
+    
+    <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+                <sphere radius="0.12" length="1.2"/>    
+        </geometry> 
+        <material name="Blue">
+            <color rgba="0 0 0.8 1"/>
+        </material>
+    </visual>
+    
+    <visual>
+        <origin rpy="0 0 0" xyz="0 0 0.16"/>
+        <geometry>
+            <box size="0.05 0.14 0.12"/>       
+        </geometry> 
+        <material name="Yellow">
+           <color rgba="1.0 1.0 0 1.0"/>
+        </material>
+    </visual>
+</link>
+
+<link name="punho"> 
+    <pose>0 0 0 0 0 </pose>  
+    <inertial>
+        <mass value="0.1"/>
+        <origin rpy="0 0 0" xyz="0 0 2"/>
+        <inertia ixx="0.3954166667" ixy="0" ixz="0" iyy="0.10620833" iyz="0" izz="0.1062083333"/>
+    </inertial>  
+
+    <collision name="collision_chassis">  
+        <origin rpy="0 0 0" xyz="0 0 0.1"/> 
+        <geometry>            
+            <cylinder radius="0.1" length="0.01"/>    
+        </geometry> 
+    </collision>
+    
+    <visual>
+        <origin rpy="0 0 0" xyz="0 0 0.1"/>
+        <geometry>
+                <cylinder radius="0.1" length="0.01"/>    
+        </geometry> 
+        <material name="Blue">
+            <color rgba="0 0 0.8 1"/>
+        </material>
+    </visual>
+</link>
+
+
+<link name="riser"> 
+    <pose>0 0 0 0 0 </pose>  
+    <inertial>
+        <mass value="0.2"/>
+        <origin rpy="0.02 0 0" xyz="0 0 0"/>
+        <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>  
+
+    <collision name="collision_chassis">  
+        <origin rpy="0 -1.55 0" xyz="0 0 0.2"/> 
+        <geometry>            
+            <box size="0.2 0.2 1.0"/>    
+            </geometry> 
+    </collision>
+    <visual>
+        <origin rpy="0 -1.55 0" xyz="0 0 0.2"/>
+        <geometry>
+            <box size="0.2 0.2 1.0"/>    
+        </geometry> 
+        <material name="Blue">
+            <color rgba="0 0 0.8 1"/>
+        </material>
+    </visual>
+</link>
+
+<link name="palm"> 
+    <pose>0 0 0 0 0 </pose>  
+    <inertial>
+        <mass value="0.2"/>
+        <origin rpy="0 0 0" xyz="-0.6 0 0.35"/> 
+        <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>  
+    <collision name="collision_chassis">  
+        <origin rpy="0 0 0" xyz="-0.6 0 0.35"/> 
+        <geometry>            
+            <box size="0.1 0.2 0.1"/>    
+        </geometry> 
+    </collision>
+    <visual>
+        <origin rpy="0 0 0" xyz="-0.6 0 0.35"/>
+        <geometry>
+            <box size="0.1 0.2 0.1"/>    
+        </geometry> 
+        <material name="Blue">
+            <color rgba="0 0 0.8 1"/>
+        </material>
+    </visual>
+</link>  
+
+<link name="left_finger"> 
+    <pose>0 0 0 0 0 </pose>  
+    <inertial>
+        <mass value="0.1"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>  
+    <collision name="collision_chassis">  
+        <origin rpy="0.67 0 0" xyz="-0.6 0.14 0.4"/>
+        <geometry>            
+            <box size="0.1 0.3 0.1"/>    
+        </geometry> 
+    </collision>
+    <visual>
+        <origin rpy="0.67 0 0" xyz="-0.6 0.14 0.4"/>
+        <geometry>
+            <box size="0.1 0.3 0.1"/>    
+        </geometry> 
+        <material name="Blue">
+            <color rgba="0 0 0.8 1"/>
+        </material>
+    </visual>
+</link> 
+
+<link name="right_finger"> 
+    <pose>0.1 -0.2 0.05 0 0 </pose>  
+    <inertial>
+        <mass value="0.1"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>  
+    <collision name="collision_chassis">  
+        <origin rpy="-0.67 0 0" xyz="-0.6 -0.14 0.4"/>
+        <geometry>            
+            <box size="0.1 0.3 0.1"/>    
+        </geometry> 
+    </collision>
+    <visual>
+        <origin rpy="-0.67 0 0" xyz="-0.6 -0.14 0.4"/>
+        <geometry>
+            <box size="0.1 0.3 0.1"/>    
+        </geometry> 
+        <material name="Blue">
+            <color rgba="0 0 0.8 1"/>
+        </material>
+    </visual>
+</link>
+
+<link name="l_finger_tip"> 
+    <pose>0 0 0 0 0 </pose>  
+    <inertial>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="0.1"/>
+        <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>  
+    <collision name="collision_chassis">  
+        <origin rpy="1.5 0 0" xyz="-0.6 0.25 0.57"/>
+        <geometry>            
+            <box size="0.1 0.2 0.1"/>    
+        </geometry> 
+    </collision>
+    <visual>
+        <origin rpy="1.5 0 0" xyz="-0.6 0.25 0.57"/>
+        <geometry>
+            <box size="0.1 0.2 0.1"/>    
+        </geometry> 
+        <material name="Blue">
+            <color rgba="0 0 0.8 1"/>
+        </material>
+    </visual>
+</link>
+
+<link name="r_finger_tip"> 
+    <pose>0 0 0 0 0 </pose>  
+    <inertial>
+        <mass value="0.1"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>  
+    <collision name="collision_chassis">  
+        <origin rpy="1.5 0 0" xyz="-0.6 -0.25 0.57"/>
+        <geometry>            
+            <box size="0.1 0.2 0.1"/>    
+        </geometry> 
+    </collision>
+    <visual>
+        <origin rpy="1.5 0 0" xyz="-0.6 -0.25 0.57"/>
+        <geometry>
+            <box size="0.1 0.2 0.1"/>    
+        </geometry> 
+        <material name="Blue">
+            <color rgba="0 0 0.8 1"/>
+        </material>
+    </visual>
+</link>  
+
+  <joint name="dummy_joint" type="fixed">
+    <parent link="dummy"/>
+    <child link="base_link"/>
+  </joint> 
+
+  <joint name="junta1" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort="1000" velocity="0.2" lower="-3.13" upper="3.13" />
+    <origin xyz="0 0 0.45" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="base"/>
+    <dynamics damping="${damping_value}" friction="${friction_value}"/>
+  </joint>
+  <static>true</static>
+
+  <joint name="junta2" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000" velocity="0.2" lower="0" upper="1.6" />
+    <origin xyz="0 0 0.5" rpy="0 0 0"/> 
+    <parent link="base"/>
+    <child link="ligacao"/>
+    <dynamics damping="${damping_value}" friction="${friction_value}"/>
+  </joint>
+  <static>true</static>
+  
+  <joint name="junta3" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000" velocity="0.2" lower="0" upper="1.6" />
+    <origin xyz="0 0 1.1" rpy="0 0 0"/>
+    <parent link="ligacao"/>
+    <child link="braco"/>
+    <dynamics damping="${damping_value}" friction="${friction_value}"/>
+  </joint>
+  <static>true</static>
+
+  <joint name="junta4" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000" velocity="0.2" lower="-0.9" upper="0.9" />
+    <origin xyz="0 0 1.2" rpy="0 0 0"/> 
+    <parent link="braco"/>
+    <child link="antepunho"/>
+    <dynamics damping="${damping_value}" friction="${friction_value}"/>
+  </joint>
+  <static>true</static>
+
+  <joint name="junta5" type="revolute">
+    <axis xyz="0 0 -1"/>
+    <limit effort="1000" velocity="0.2" lower="-3.14" upper="3.14" />
+    <origin xyz="0 0 0.12" rpy="0 0 0"/> 
+    <parent link="antepunho"/>
+    <child link="punho"/>
+    <dynamics damping="${damping_value}" friction="${friction_value}"/>
+  </joint>
+  <static>true</static>  
+
+  <joint name="ligarra" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort="1000" velocity="0.2" lower="-0.3" upper="0.5" />
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="punho"/>  
+    <child link="riser"/>
+    <dynamics damping="${damping_value}" friction="${friction_value}"/>
+    </joint> 
+  <static>true</static>
+ 
+  <joint name="palm_riser" type="prismatic">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000" velocity="0.2" lower="0.2" upper="1.1" />
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="riser"/>  
+    <child link="palm"/>
+    <dynamics damping="${damping_value}" friction="${friction_value}"/>
+    </joint> 
+  <static>true</static>   
+    
+<joint name="palm_right_finger" type="revolute">
+    <axis xyz="-1 0 0"/>
+    <limit effort="1000" velocity="0.2" lower="0" upper="0.25" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="palm"/>  
+    <child link="right_finger"/>
+    <dynamics damping="${damping_value}" friction="${friction_value}"/>
+    </joint> 
+  <static>true</static>
+
+<joint name="palm_left_finger" type="revolute">
+  <axis xyz="1 0 0"/>
+  <limit effort="1000" velocity="0.2" lower="0" upper="0.25" />
+  <origin xyz="0 0 0" rpy="0 0 0" />
+  <parent link="palm"/>  
+  <child link="left_finger"/>
+  <dynamics damping="${damping_value}" friction="${friction_value}"/>
+  </joint> 
+<static>true</static>
+
+<joint name="left_finger_tip" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000" velocity="0.2" lower="0" upper="0.04" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="left_finger"/>  
+    <child link="l_finger_tip"/>
+    <dynamics damping="${damping_value}" friction="${friction_value}"/>
+    </joint> 
+  <static>true</static>
+
+<joint name="right_finger_tip" type="revolute">
+  <axis xyz="-1 0 0"/>
+  <limit effort="1000" velocity="0.2" lower="0" upper="0.04" />
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+  <parent link="right_finger"/>  
+  <child link="r_finger_tip"/>
+  <dynamics damping="${damping_value}" friction="${friction_value}"/>
+  </joint> 
+<static>true</static> 
+
+   <xacro:transmission_block joint_name="junta1" idx="1"/>
+   <xacro:transmission_block joint_name="junta2" idx="2"/>
+   <xacro:transmission_block joint_name="junta3" idx="3"/>
+   <xacro:transmission_block joint_name="junta4" idx="4"/>
+   <xacro:transmission_block joint_name="junta5" idx="5"/>
+   <xacro:transmission_block joint_name="ligarra" idx="6"/> 
+   <xacro:transmission_block joint_name="palm_riser" idx="7"/>
+   <xacro:transmission_block joint_name="palm_left_finger" idx="8"/>
+   <xacro:transmission_block joint_name="left_finger_tip" idx="9"/>
+   <xacro:transmission_block joint_name="palm_right_finger" idx="10"/>
+   <xacro:transmission_block joint_name="right_finger_tip" idx="11"/>
+   
+   <gazebo>
+  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    <robotNamespace>/robot</robotNamespace>
+  </plugin>
+</gazebo>
+
+</xacro:macro>
+
+</robot>

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro"
+       name="ur5" >
+
+  <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
+
+  <!-- common stuff -->
+  <xacro:include filename="$(find ur_description)/urdf/common.gazebo.xacro" />
+
+  <!-- ur5 -->
+  <xacro:include filename="$(find ur_description)/urdf/my_robot_teste.urdf.xacro" />
+
+  <!-- arm -->
+  <xacro:ur5_robot prefix="" joint_limited="true"
+    shoulder_pan_lower_limit="${-pi}" shoulder_pan_upper_limit="${pi}"
+    shoulder_lift_lower_limit="${-pi}" shoulder_lift_upper_limit="${pi}"
+    elbow_joint_lower_limit="${-pi}" elbow_joint_upper_limit="${pi}"
+    wrist_1_lower_limit="${-pi}" wrist_1_upper_limit="${pi}"
+    wrist_2_lower_limit="${-pi}" wrist_2_upper_limit="${pi}"
+    wrist_3_lower_limit="${-pi}" wrist_3_upper_limit="${pi}"
+    transmission_hw_interface="$(arg transmission_hw_interface)"
+  />
+
+  <link name="world" />
+
+  <joint name="world_joint" type="fixed">
+    <parent link="world" />
+    <child link = "base_link" />
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+  </joint>
+
+</robot>
+
+<!-- junta1_lower_limit:=${-pi}    junta1_upper_limit:=${pi}
+junta2_lower_limit:=${-pi}    junta2_upper_limit:=${pi}
+junta3_lower_limit:=${-pi}    junta3_upper_limit:=${pi}
+junta4_lower_limit:=${-pi}    junta4_upper_limit:=${pi}
+junta5_lower_limit:=${-pi}    junta5_upper_limit:=${pi}
+ligarra_lower_limit:=${-pi}   ligarra_upper_limit:=${pi}
+base_link_lower_limit:=${-pi}   base_link_upper_limit:=${pi}
+palm_riser_upper_limit:=${-pi}   palm_riser_upper_limit:=${pi}
+palm_right_finger_lower_limit:=${-pi}   palm_right_finger_upper_limit:=${pi}
+palm_left_finger_lower_limit:=${-pi}) palm_left_finger_upper_limit:=${-pi})
+right_finger_tip_lower_limit:=${pi}   right_finger_tip_upper_limit_limit:=${pi}
+left_finger_tip_lower_limit_limit:=${pi}      left_finger_tip_upper_limit_limit:=${pi}
+transmission_hw_interface:=hardware_interface/PositionJointInterface -->

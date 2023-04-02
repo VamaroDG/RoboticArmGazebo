@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro"
+       name="my_robot" >
+
+  <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
+
+  <!-- common stuff -->
+  <xacro:include filename="$(find my_robot_description)/urdf/common.gazebo.xacro" />
+
+  <!-- braco -->
+  <xacro:include filename="$(find my_robot_description)/urdf/my_robot_teste.urdf.xacro" />
+
+  <!-- arm -->
+  <xacro:my_robot prefix="" joint_limited="false"
+    transmission_hw_interface="$(arg transmission_hw_interface)"
+  />
+
+
+</robot>

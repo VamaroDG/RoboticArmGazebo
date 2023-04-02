@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:macro name="my_arm_gazebo" params="prefix">
+    
+    <gazebo reference="${prefix}world">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}base_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}braco">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}ligacao">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}antepunho">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}punho">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}riser">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}palm">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}right_finger">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}left_finger">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}l_finger_tip">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}r_finger_tip">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+  </xacro:macro>
+
+
+</robot>

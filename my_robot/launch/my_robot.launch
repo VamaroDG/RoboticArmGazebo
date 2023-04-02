@@ -1,0 +1,74 @@
+<launch>
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>  
+  <arg name="headless" default="false"/>  
+  <arg name="debug" default="false"/>
+
+  <!--abrir o empty world so que apenas dentro de uma outra pasta, de forma a fazer tudo logo num só -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find my_robot_description)/worlds/my_robot.world"/>
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include> 
+
+  <!-- dar load a URDF do robo no server -->
+  <param name="robot_description"
+    command="$(find xacro)/xacro --inorder '$(find my_robot_description)/urdf/my_robot.xacro'" />
+
+
+  <!-- Script python para dar spawn ao robo no mundo do gazebo -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+    args="-urdf -model my_robot -param robot_description"/> 
+  <node name ="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <param name = "use_gui" value ="TRUE" />
+
+  <!-- <node name="tf_broadcast" pkg="my_robot_description" type="my_robot_description_node" args="-+-test" respawn="true" output="screen" />  -->
+
+       
+<!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find my_robot_description)/config/my_robot.yaml" command="load" />   <!--esta linha ta boa  -->
+  <!-- <rosparam file ="$(find_move_it)/>config/rviz_controller.yaml" command="load"/>
+  <rosparam file ="$(find_move_it)/>config/fake_controllers.yaml" command="load"/>
+  <rosparam file ="$(find_move_it)/>config/joint_limits.yaml" command="load"/>
+  <rosparam file ="$(find_move_it)/>config/ros_controllers.yaml" command="load"/>
+  <rosparam file ="$(find_move_it)/>config/kinematics.yaml" command="load"/>
+  <rosparam file ="$(find_move_it)/>config/rviz_controller.yaml" command="load"/>
+  <rosparam file ="$(find_move_it)/>config/ompl_planning.yaml" command="load"/>
+  <rosparam file ="$(find_move_it)/>config/chomp_planning.yaml" command="load"/> -->
+
+  <include file="$(find gazebo_ros)/launch/move_group.launch"/>
+    <arg name="publish_monitored_planning_scene" value="true"/>
+  <arg name ="config" value ="true"/>
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/robot" args="joint0_position_controller
+                                      joint1_position_controller
+                                      joint2_position_controller
+                                      joint3_position_controller
+                                      joint4_position_controller
+                                      joint5_position_controller
+                                      joint6_position_controller
+                                      joint7_position_controller
+                                      joint8_position_controller
+                                      joint9_position_controller
+                                      joint10_position_controller"/>
+                                  
+<node name="rviz" pkg="rviz" type="rviz" args="-d $(find my_robot_description)/config/config.rviz"  />
+
+<!-- converter joint states para TF transforms em RVIZ -->
+<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+  respawn="false" output="screen">
+ <remap from="/joint_states" to="/robot/joint_states"/>
+</node>
+
+
+    <!--tf publisher-->
+    <!-- <node pkg="tf" type="static_transform_publisher" name="$(arg argNamespace)_camera_link" args="0 0 0 1.57079633 3.14159265 1.57079633 /base_link /camera_link 100" /> -->
+
+
+</launch>                        

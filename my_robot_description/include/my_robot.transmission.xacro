@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:macro name="my_arm_transmission" params="prefix hw_interface">
+  
+    <transmission name="${prefix}base_link_joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}base_link_joint">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}base_link_joint_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="${prefix}junta1_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}junta1">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}junta1_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="${prefix}junta2_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}junta2">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}junta2_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="${prefix}junta3_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}junta3">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}junta3_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="${prefix}junta4_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}junta4">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}junta4_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  
+    <transmission name="${prefix}junta5_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}junta5">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}junta5_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+    
+    <transmission name="${prefix}palm_riser_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}palm_riser">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}palm_riser_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="${prefix}palm_right_finger_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}palm_right_finger">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}palm_right_finger_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+  <transmission name="${prefix}palm_left_finger_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="${prefix}palm_left_finger">
+      <hardwareInterface>${hw_interface}</hardwareInterface>
+    </joint>
+    <actuator name="${prefix}palm_left_fingermotor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+    <transmission name="${prefix}left_finger_tip_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}left_finger_tip">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}left_finger_tip_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <transmission name="${prefix}right_finger_tip_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}right_finger_tip">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}right_finger_tip_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+</robot>

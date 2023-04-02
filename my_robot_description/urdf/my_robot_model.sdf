@@ -1,0 +1,684 @@
+<sdf version='1.6'>
+  <model name='robot'>
+    <link name='base_link'>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <mass>50</mass>
+        <inertia>
+          <ixx>0.395417</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.106208</iyy>
+          <iyz>0</iyz>
+          <izz>0.106208</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_fixed_joint_lump__collision_chassis_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.8 0.8 0.6</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.8 0.8 0.4</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <link name='base'>
+      <pose frame=''>0 0 0.45 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>0 0 0.5 0 -0 0</pose>
+        <mass>2</mass>
+        <inertia>
+          <ixx>0.395417</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.106208</iyy>
+          <iyz>0</iyz>
+          <izz>0.106208</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_fixed_joint_lump__collision_chassis_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.5</length>
+            <radius>0.25</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='base_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.5</length>
+            <radius>0.25</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+      <visual name='base_visual_1'>
+        <pose frame=''>0 0.2 0.45 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.4 0.07 0.4</size>
+          </box>
+        </geometry>
+      </visual>
+      <visual name='base_visual_2'>
+        <pose frame=''>0 -0.2 0.45 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.4 0.07 0.4</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='junta1' type='revolute'>
+      <child>base</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-3.13</lower>
+          <upper>3.13</upper>
+          <effort>1000</effort>
+          <velocity>0.2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>10</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='ligacao'>
+      <pose frame=''>0 0 0.95 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <mass>0.5</mass>
+        <inertia>
+          <ixx>0.395417</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.106208</iyy>
+          <iyz>0</iyz>
+          <izz>0.106208</izz>
+        </inertia>
+      </inertial>
+      <collision name='ligacao_fixed_joint_lump__collision_chassis_collision'>
+        <pose frame=''>0 0 0.5 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>1</length>
+            <radius>0.15</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <collision name='ligacao_fixed_joint_lump__collision_chassis_collision_1'>
+        <pose frame=''>0 0 -0.07 1.58 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.3</length>
+            <radius>0.2</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='ligacao_visual'>
+        <pose frame=''>0 0 0.5 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>1</length>
+            <radius>0.15</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+      <visual name='ligacao_visual_1'>
+        <pose frame=''>0 0.17 1.13 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.4 0.05 0.5</size>
+          </box>
+        </geometry>
+      </visual>
+      <visual name='ligacao_visual_2'>
+        <pose frame=''>0 -0.17 1.13 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.4 0.05 0.5</size>
+          </box>
+        </geometry>
+      </visual>
+      <visual name='ligacao_visual_3'>
+        <pose frame=''>0 0 -0.07 1.58 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.3</length>
+            <radius>0.2</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='junta2' type='revolute'>
+      <child>ligacao</child>
+      <parent>base</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>1.6</upper>
+          <effort>1000</effort>
+          <velocity>0.2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>10</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='braco'>
+      <pose frame=''>0 0 2.05 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>0 0 2 0 -0 0</pose>
+        <mass>0.5</mass>
+        <inertia>
+          <ixx>0.395417</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.106208</iyy>
+          <iyz>0</iyz>
+          <izz>0.106208</izz>
+        </inertia>
+      </inertial>
+      <collision name='braco_fixed_joint_lump__collision_chassis_collision'>
+        <pose frame=''>0 0 0.7 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>1</length>
+            <radius>0.125</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <collision name='braco_fixed_joint_lump__suporte_cilindro_collision_1'>
+        <pose frame=''>0 0 0.04 1.58 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.3</length>
+            <radius>0.2</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='braco_visual'>
+        <pose frame=''>0 0 0.7 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>1</length>
+            <radius>0.125</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+      <visual name='braco_visual_1'>
+        <pose frame=''>0 0 0.04 1.58 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.3</length>
+            <radius>0.2</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='junta3' type='revolute'>
+      <child>braco</child>
+      <parent>ligacao</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>1.6</upper>
+          <effort>1000</effort>
+          <velocity>0.2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>10</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='antepunho'>
+      <pose frame=''>0 0 3.25 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>0 0 2 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.395417</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.106208</iyy>
+          <iyz>0</iyz>
+          <izz>0.106208</izz>
+        </inertia>
+      </inertial>
+      <collision name='antepunho_fixed_joint_lump__collision_chassis_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.12</radius>
+          </sphere>
+        </geometry>
+      </collision>
+      <visual name='antepunho_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.12</radius>
+          </sphere>
+        </geometry>
+      </visual>
+      <visual name='antepunho_visual_1'>
+        <pose frame=''>0 0 0.16 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.05 0.14 0.12</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='junta4' type='revolute'>
+      <child>antepunho</child>
+      <parent>braco</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-0.9</lower>
+          <upper>0.9</upper>
+          <effort>1000</effort>
+          <velocity>0.2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>10</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='punho'>
+      <pose frame=''>0 0 3.37 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>0 0 2 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.395417</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.106208</iyy>
+          <iyz>0</iyz>
+          <izz>0.106208</izz>
+        </inertia>
+      </inertial>
+      <collision name='punho_fixed_joint_lump__collision_chassis_collision'>
+        <pose frame=''>0 0 0.1 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.1</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='punho_visual'>
+        <pose frame=''>0 0 0.1 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.1</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='junta5' type='revolute'>
+      <child>punho</child>
+      <parent>antepunho</parent>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>1000</effort>
+          <velocity>0.2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>10</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='riser'>
+      <pose frame=''>0 0 3.37 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>0 0 0 0.02 -0 0</pose>
+        <mass>0.2</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.01</iyy>
+          <iyz>0</iyz>
+          <izz>0.01</izz>
+        </inertia>
+      </inertial>
+      <collision name='riser_fixed_joint_lump__collision_chassis_collision'>
+        <pose frame=''>0 0 0.2 0 -1.55 0</pose>
+        <geometry>
+          <box>
+            <size>0.2 0.2 1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='riser_visual'>
+        <pose frame=''>0 0 0.2 0 -1.55 0</pose>
+        <geometry>
+          <box>
+            <size>0.2 0.2 1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='ligarra' type='revolute'>
+      <child>riser</child>
+      <parent>punho</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.3</lower>
+          <upper>0.5</upper>
+          <effort>1000</effort>
+          <velocity>0.2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>10</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='palm'>
+      <pose frame=''>0 0 3.37 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>-0.6 0 0.35 0 -0 0</pose>
+        <mass>0.2</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.01</iyy>
+          <iyz>0</iyz>
+          <izz>0.01</izz>
+        </inertia>
+      </inertial>
+      <collision name='palm_fixed_joint_lump__collision_chassis_collision'>
+        <pose frame=''>-0.6 0 0.35 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.2 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='palm_visual'>
+        <pose frame=''>-0.6 0 0.35 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.2 0.1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='palm_riser' type='prismatic'>
+      <child>palm</child>
+      <parent>riser</parent>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>0.2</lower>
+          <upper>1.1</upper>
+          <effort>1000</effort>
+          <velocity>0.2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>10</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='left_finger'>
+      <pose frame=''>0 0 3.37 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.01</iyy>
+          <iyz>0</iyz>
+          <izz>0.01</izz>
+        </inertia>
+      </inertial>
+      <collision name='left_finger_fixed_joint_lump__collision_chassis_collision'>
+        <pose frame=''>-0.6 0.14 0.4 0.67 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.3 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='left_finger_visual'>
+        <pose frame=''>-0.6 0.14 0.4 0.67 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.3 0.1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='palm_left_finger' type='revolute'>
+      <child>left_finger</child>
+      <parent>palm</parent>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0.25</upper>
+          <effort>1000</effort>
+          <velocity>0.2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>10</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='l_finger_tip'>
+      <pose frame=''>0 0 3.37 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.01</iyy>
+          <iyz>0</iyz>
+          <izz>0.01</izz>
+        </inertia>
+      </inertial>
+      <collision name='l_finger_tip_fixed_joint_lump__collision_chassis_collision'>
+        <pose frame=''>-0.6 0.25 0.57 1.5 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.2 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='l_finger_tip_visual'>
+        <pose frame=''>-0.6 0.25 0.57 1.5 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.2 0.1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='left_finger_tip' type='revolute'>
+      <child>l_finger_tip</child>
+      <parent>left_finger</parent>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0.04</upper>
+          <effort>1000</effort>
+          <velocity>0.2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>10</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='right_finger'>
+      <pose frame=''>0 0 3.37 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.01</iyy>
+          <iyz>0</iyz>
+          <izz>0.01</izz>
+        </inertia>
+      </inertial>
+      <collision name='right_finger_fixed_joint_lump__collision_chassis_collision'>
+        <pose frame=''>-0.6 -0.14 0.4 -0.67 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.3 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='right_finger_visual'>
+        <pose frame=''>-0.6 -0.14 0.4 -0.67 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.3 0.1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='palm_right_finger' type='revolute'>
+      <child>right_finger</child>
+      <parent>palm</parent>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0.25</upper>
+          <effort>1000</effort>
+          <velocity>0.2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>10</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='r_finger_tip'>
+      <pose frame=''>0 0 3.37 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.01</iyy>
+          <iyz>0</iyz>
+          <izz>0.01</izz>
+        </inertia>
+      </inertial>
+      <collision name='r_finger_tip_fixed_joint_lump__collision_chassis_collision'>
+        <pose frame=''>-0.6 -0.25 0.57 1.5 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.2 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='r_finger_tip_visual'>
+        <pose frame=''>-0.6 -0.25 0.57 1.5 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.2 0.1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='right_finger_tip' type='revolute'>
+      <child>r_finger_tip</child>
+      <parent>right_finger</parent>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0.04</upper>
+          <effort>1000</effort>
+          <velocity>0.2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>10</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <static>0</static>
+    <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
+      <robotNamespace>/robot</robotNamespace>
+    </plugin>
+  </model>
+</sdf>

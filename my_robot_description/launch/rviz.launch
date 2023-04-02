@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+<!-- Start the GUI that lets the user control the states of the individual
+joints of the robot. -->
+<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="true"/>    
+</node>
+
+<!-- Use the robot description and the joint states to compute the poses of
+the robot links. -->
+<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+<node name="rviz" pkg="rviz" type="rviz"/>
+<!-- Display the robot configuration in Rviz. -->
+
+</launch>

@@ -1,0 +1,70 @@
+<launch>  
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>  
+  <arg name="headless" default="false"/>  
+  <arg name="debug" default="false"/>
+  <arg name="pipeline" default="ompl" />
+
+  <!--abrir o empty world so que apenas dentro de uma outra pasta, de forma a fazer tudo logo num só -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find my_robot_description)/worlds/my_robot.world"/>
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>  
+
+   <include file="$(find move_it)/launch/move_group.launch">
+    <arg name="allow_trajectory_execution" value="true"/>
+    <arg name="fake_execution" value="true"/>
+    <arg name="info" value="true"/>
+    <arg name="debug" value="$(arg debug)"/>
+    <arg name="pipeline" value="$(arg pipeline)"/>
+  </include> 
+ 
+  <!-- dar load ao URDF do robo no server -->
+  <param name="robot_description"
+    command="$(find xacro)/xacro --inorder '$(find my_robot_description)/urdf/my_robot.xacro'" />
+
+  <!-- Script python para dar spawn ao robo no mundo do gazebo -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+    args="-urdf -model my_robot -param robot_description"/> 
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find my_robot_description)/config/my_robot.yaml" command="load"/>
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/robot" args="joint0_position_controller
+                                      joint1_position_controller
+                                      joint2_position_controller
+                                      joint3_position_controller
+                                      joint4_position_controller
+                                      joint5_position_controller
+                                      joint6_position_controller
+                                      joint7_position_controller
+                                      joint8_position_controller
+                                      joint9_position_controller
+                                      joint10_position_controller"/>
+  <!-- Use the robot description and the joint states to compute the poses of
+  the robot links. -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="50.0" />
+    <param name="tf_prefix" type="string" value="" />
+  </node>
+ <!-- Start the GUI that lets the user control the states of the individual
+  joints of the robot. -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+      <param name="use_gui" value="true"/>
+  </node>
+   <!-- Fake Calibration -->
+  <node pkg="rostopic" type="rostopic" name="fake_joint_calibration"
+  args="pub /calibrated std_msgs/Bool true" />
+
+  <!-- Display the robot configuration in Rviz. -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find my_robot_description)/config/config.rviz"/>
+    
+    <!-- Upload the robot model to Gazebo and run the plugin that injects the ROS TF poses into the Gazebo model. -->
+    <node name="upload_model" pkg="my_robot_description" type="upload_model" args="$(arg xacro)"/>
+</launch>                        

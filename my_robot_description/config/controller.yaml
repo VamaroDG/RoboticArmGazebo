@@ -1,0 +1,32 @@
+arm_controller:
+  type: position_controllers/JointTrajectoryController
+  joints:
+    - junta1
+    - junta2
+    - junta3
+    - junta4
+    - junta5
+  
+grip_controller:
+  type: position_controllers/JointTrajectoryController
+  joints:
+    - ligarra
+    - palm_riser
+    - palm_left_finger
+    - left_finger_tip
+    - palm_right_finger
+    - right_finger_tip
+    
+      # joint_group_position_controller:
+      #  name: "grip_controller"
+      #  action_ns: grip
+      #  default: True
+      #  type: <
+      #  joints:
+      #    - ligarra
+      #    - palm_riser
+      #    - palm_left_finger
+      #    - left_finger_tip
+      #    - palm_right_finger
+      #    - right_finger_tip
+   

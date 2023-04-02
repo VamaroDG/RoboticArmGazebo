@@ -1,0 +1,463 @@
+<sdf version="1.6">
+  <actor name="robot">
+    <link name="base_link">
+      <pose frame="">0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <mass>50</mass>
+        <inertia>
+          <ixx>0.395417</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.106208</iyy>
+          <iyz>0</iyz>
+          <izz>0.106208</izz>
+        </inertia>
+      </inertial>
+      <collision name="base_link_fixed_joint_lump__collision_chassis_collision">
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.8 0.8 0.6</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="base_link_visual">
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.8 0.8 0.4</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <link name="base">
+      <pose frame="">0 0 0.45 0 -0 0</pose>
+      <inertial>
+        <pose frame="">0 0 0.5 0 -0 0</pose>
+        <mass>2</mass>
+        <inertia>
+          <ixx>0.395417</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.106208</iyy>
+          <iyz>0</iyz>
+          <izz>0.106208</izz>
+        </inertia>
+      </inertial>
+      <collision name="base_fixed_joint_lump__collision_chassis_collision">
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.5</length>
+            <radius>0.25</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="base_visual">
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.5</length>
+            <radius>0.25</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+      <visual name="base_visual_1">
+        <pose frame="">0 0.2 0.45 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.4 0.07 0.4</size>
+          </box>
+        </geometry>
+      </visual>
+      <visual name="base_visual_2">
+        <pose frame="">0 -0.2 0.45 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.4 0.07 0.4</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <link name="ligacao">
+      <pose frame="">0 0 0.95 0 -0 0</pose>
+      <inertial>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <mass>0.5</mass>
+        <inertia>
+          <ixx>0.395417</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.106208</iyy>
+          <iyz>0</iyz>
+          <izz>0.106208</izz>
+        </inertia>
+      </inertial>
+      <collision name="ligacao_fixed_joint_lump__collision_chassis_collision">
+        <pose frame="">0 0 0.5 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>1</length>
+            <radius>0.15</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <collision name="ligacao_fixed_joint_lump__collision_chassis_collision_1">
+        <pose frame="">0 0 -0.07 1.58 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.3</length>
+            <radius>0.2</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="ligacao_visual">
+        <pose frame="">0 0 0.5 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>1</length>
+            <radius>0.15</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+      <visual name="ligacao_visual_1">
+        <pose frame="">0 0.17 1.13 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.4 0.05 0.5</size>
+          </box>
+        </geometry>
+      </visual>
+      <visual name="ligacao_visual_2">
+        <pose frame="">0 -0.17 1.13 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.4 0.05 0.5</size>
+          </box>
+        </geometry>
+      </visual>
+      <visual name="ligacao_visual_3">
+        <pose frame="">0 0 -0.07 1.58 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.3</length>
+            <radius>0.2</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <link name="braco">
+      <pose frame="">0 0 2.05 0 -0 0</pose>
+      <inertial>
+        <pose frame="">0 0 2 0 -0 0</pose>
+        <mass>0.5</mass>
+        <inertia>
+          <ixx>0.395417</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.106208</iyy>
+          <iyz>0</iyz>
+          <izz>0.106208</izz>
+        </inertia>
+      </inertial>
+      <collision name="braco_fixed_joint_lump__collision_chassis_collision">
+        <pose frame="">0 0 0.7 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>1</length>
+            <radius>0.125</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <collision name="braco_fixed_joint_lump__suporte_cilindro_collision_1">
+        <pose frame="">0 0 0.04 1.58 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.3</length>
+            <radius>0.2</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="braco_visual">
+        <pose frame="">0 0 0.7 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>1</length>
+            <radius>0.125</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+      <visual name="braco_visual_1">
+        <pose frame="">0 0 0.04 1.58 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.3</length>
+            <radius>0.2</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <link name="antepunho">
+      <pose frame="">0 0 3.25 0 -0 0</pose>
+      <inertial>
+        <pose frame="">0 0 2 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.395417</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.106208</iyy>
+          <iyz>0</iyz>
+          <izz>0.106208</izz>
+        </inertia>
+      </inertial>
+      <collision name="antepunho_fixed_joint_lump__collision_chassis_collision">
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.12</radius>
+          </sphere>
+        </geometry>
+      </collision>
+      <visual name="antepunho_visual">
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.12</radius>
+          </sphere>
+        </geometry>
+      </visual>
+      <visual name="antepunho_visual_1">
+        <pose frame="">0 0 0.16 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.05 0.14 0.12</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <link name="punho">
+      <pose frame="">0 0 3.37 0 -0 0</pose>
+      <inertial>
+        <pose frame="">0 0 2 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.395417</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.106208</iyy>
+          <iyz>0</iyz>
+          <izz>0.106208</izz>
+        </inertia>
+      </inertial>
+      <collision name="punho_fixed_joint_lump__collision_chassis_collision">
+        <pose frame="">0 0 0.1 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.1</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="punho_visual">
+        <pose frame="">0 0 0.1 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.1</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <link name="riser">
+      <pose frame="">0 0 3.37 0 -0 0</pose>
+      <inertial>
+        <pose frame="">0 0 0 0.02 -0 0</pose>
+        <mass>0.2</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.01</iyy>
+          <iyz>0</iyz>
+          <izz>0.01</izz>
+        </inertia>
+      </inertial>
+      <collision name="riser_fixed_joint_lump__collision_chassis_collision">
+        <pose frame="">0 0 0.2 0 -1.55 0</pose>
+        <geometry>
+          <box>
+            <size>0.2 0.2 1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="riser_visual">
+        <pose frame="">0 0 0.2 0 -1.55 0</pose>
+        <geometry>
+          <box>
+            <size>0.2 0.2 1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <link name="palm">
+      <pose frame="">0 0 3.37 0 -0 0</pose>
+      <inertial>
+        <pose frame="">-0.6 0 0.35 0 -0 0</pose>
+        <mass>0.2</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.01</iyy>
+          <iyz>0</iyz>
+          <izz>0.01</izz>
+        </inertia>
+      </inertial>
+      <collision name="palm_fixed_joint_lump__collision_chassis_collision">
+        <pose frame="">-0.6 0 0.35 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.2 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="palm_visual">
+        <pose frame="">-0.6 0 0.35 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.2 0.1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <link name="left_finger">
+      <pose frame="">0 0 3.37 0 -0 0</pose>
+      <inertial>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.01</iyy>
+          <iyz>0</iyz>
+          <izz>0.01</izz>
+        </inertia>
+      </inertial>
+      <collision name="left_finger_fixed_joint_lump__collision_chassis_collision">
+        <pose frame="">-0.6 0.14 0.4 0.67 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.3 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="left_finger_visual">
+        <pose frame="">-0.6 0.14 0.4 0.67 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.3 0.1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <link name="l_finger_tip">
+      <pose frame="">0 0 3.37 0 -0 0</pose>
+      <inertial>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.01</iyy>
+          <iyz>0</iyz>
+          <izz>0.01</izz>
+        </inertia>
+      </inertial>
+      <collision name="l_finger_tip_fixed_joint_lump__collision_chassis_collision">
+        <pose frame="">-0.6 0.25 0.57 1.5 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.2 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="l_finger_tip_visual">
+        <pose frame="">-0.6 0.25 0.57 1.5 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.2 0.1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <link name="right_finger">
+      <pose frame="">0 0 3.37 0 -0 0</pose>
+      <inertial>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.01</iyy>
+          <iyz>0</iyz>
+          <izz>0.01</izz>
+        </inertia>
+      </inertial>
+      <collision name="right_finger_fixed_joint_lump__collision_chassis_collision">
+        <pose frame="">-0.6 -0.14 0.4 -0.67 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.3 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="right_finger_visual">
+        <pose frame="">-0.6 -0.14 0.4 -0.67 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.3 0.1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <link name="r_finger_tip">
+      <pose frame="">0 0 3.37 0 -0 0</pose>
+      <inertial>
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.01</iyy>
+          <iyz>0</iyz>
+          <izz>0.01</izz>
+        </inertia>
+      </inertial>
+      <collision name="r_finger_tip_fixed_joint_lump__collision_chassis_collision">
+        <pose frame="">-0.6 -0.25 0.57 1.5 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.2 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="r_finger_tip_visual">
+        <pose frame="">-0.6 -0.25 0.57 1.5 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.2 0.1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
+      <robotNamespace>/robot</robotNamespace>
+    </plugin>
+  <plugin filename="libgazebo_tf_injector.so" name="gazebo_tf_injector" /></actor>
+</sdf>
